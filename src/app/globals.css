@@ -1,0 +1,357 @@
+/* ============================================================
+   LAMI LAB — дизайн-система
+   Палитра построена вокруг ассоциаций с ламинированием: тон кожи,
+   фарфор, оттенок ресниц и бровей (коньяк). Заголовки — Kyiv*Type
+   Sans Bold, интерфейс — Jura, логотип — Italiana.
+   ============================================================ */
+
+:root {
+  /* Фоны: от фарфора к тону кожи */
+  --porcelain: #f7f2ed;
+  --sand: #efe5db;
+  --latte: #e0d1c4;
+  --latte-deep: #d2c0b0;
+
+  /* Текст */
+  --espresso: #1e1613;
+  --cocoa: #6e5d51;
+  --cocoa-soft: #756254;
+
+  /* Акцент — оттенок ламинированных ресниц и бровей */
+  --cognac: #7a4f35;
+  --cognac-deep: #5c3826;
+  --cognac-tint: rgba(122, 79, 53, 0.1);
+
+  /* Линии */
+  --hairline: rgba(30, 22, 19, 0.16);
+  --hairline-soft: rgba(30, 22, 19, 0.09);
+
+  /* Заливка прозрачных кнопок при наведении — одна для всех фонов,
+     чтобы текст оставался читаемым в любом блоке */
+  --outline-hover-bg: var(--espresso);
+  --outline-hover-fg: var(--porcelain);
+
+  /* Сетка и воздух */
+  --content: 1240px;
+  --gutter: clamp(24px, 5vw, 72px);
+  --section-y: clamp(96px, 8.5vw, 168px);
+  --block-gap: clamp(44px, 4.4vw, 84px);
+
+  /* Фирменное скругление одного угла */
+  --corner-lg: 50px;
+  --corner-md: 25px;
+
+  /* Шрифты.
+     У Kyiv*Type Sans кроме веса есть ось CONT — контраст штриха:
+     0 — нейтральный гротеск, 1000 — фирменный контрастный рисунок.
+     Заголовки берут контрастную ветку, текст — нейтральную. */
+  --heading-cont: 1000;   /* Light 3 — крупные заголовки */
+  --heading-cont-sm: 500; /* Light 2 — подзаголовки и мелкие заголовки */
+  --heading-weight: 200;  /* Light */
+  --text-cont: 0;
+
+  --font-display: var(--font-italiana), 'Times New Roman', serif;
+  --font-ui: var(--font-jura), 'Trebuchet MS', sans-serif;
+  --font-text: var(--font-kyiv), var(--font-jura), sans-serif;
+
+  /* Движение */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.4s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--porcelain);
+  color: var(--espresso);
+  font-family: var(--font-text);
+  font-size: 18px;
+  font-weight: 350;
+  font-variation-settings: 'CONT' var(--text-cont);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+ul,
+ol,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cognac);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* --- Каркас ----------------------------------------------- */
+
+.section {
+  position: relative;
+  padding: var(--section-y) 0;
+  overflow: clip;
+  scroll-margin-top: 76px;
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  position: relative;
+}
+
+/* --- Типографика ------------------------------------------ */
+
+.display {
+  font-family: var(--font-text);
+  font-weight: var(--heading-weight);
+  font-variation-settings: 'CONT' var(--heading-cont);
+  font-size: clamp(34px, 5.4vw, 70px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.h2 {
+  font-family: var(--font-text);
+  font-weight: var(--heading-weight);
+  font-variation-settings: 'CONT' var(--heading-cont);
+  font-size: clamp(36px, 4.4vw, 62px);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--espresso);
+}
+
+.h3 {
+  font-family: var(--font-text);
+  font-weight: var(--heading-weight);
+  font-variation-settings: 'CONT' var(--heading-cont-sm);
+  font-size: clamp(21px, 1.7vw, 26px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  font-family: var(--font-text);
+  font-size: 18px;
+  font-weight: 350;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  color: var(--cocoa);
+}
+
+.label {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cocoa-soft);
+}
+
+/* На десктопе описания компактнее заголовков и не спорят с фото и CTA */
+@media (min-width: 1024px) {
+  body {
+    font-size: 17px;
+  }
+
+  .lead {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+}
+
+/* --- Кнопки ------------------------------------------------ */
+
+.pill {
+  --pill-bg: transparent;
+  --pill-fg: var(--espresso);
+  --pill-border: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 1px solid var(--pill-border);
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  flex: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out);
+}
+
+@media (min-width: 1024px) {
+  .pill {
+    min-height: 60px;
+    padding: 0 38px;
+    font-size: 17px;
+  }
+}
+
+.pill:active {
+  transform: scale(0.985);
+}
+
+/* Основной CTA — акцентный коньяк */
+.pill--primary {
+  --pill-bg: var(--cognac);
+  --pill-fg: #fff;
+  --pill-border: var(--cognac);
+}
+
+.pill--primary:hover {
+  --pill-bg: var(--cognac-deep);
+  --pill-border: var(--cognac-deep);
+}
+
+.pill--dark {
+  --pill-bg: var(--espresso);
+  --pill-fg: var(--porcelain);
+  --pill-border: var(--espresso);
+}
+
+.pill--dark:hover {
+  --pill-bg: var(--cognac);
+  --pill-border: var(--cognac);
+  --pill-fg: #fff;
+}
+
+/* Прозрачные кнопки: hover всегда даёт плотный тёмный фон и светлый текст,
+   поэтому кнопка читается на любом фоне — и на фарфоровом, и на тёплом. */
+.pill--outline {
+  --pill-bg: transparent;
+  --pill-fg: var(--espresso);
+  --pill-border: var(--hairline);
+}
+
+.pill--outline:hover {
+  --pill-bg: var(--outline-hover-bg);
+  --pill-fg: var(--outline-hover-fg);
+  --pill-border: var(--outline-hover-bg);
+}
+
+.pill--sm {
+  min-height: 46px;
+  padding: 0 22px;
+  font-size: 15px;
+}
+
+@media (min-width: 1024px) {
+  .pill--sm {
+    min-height: 48px;
+    padding: 0 26px;
+    font-size: 15px;
+  }
+}
+
+/* --- Мягкая подсветка -------------------------------------- */
+
+.glow {
+  position: absolute;
+  background: radial-gradient(closest-side, rgba(122, 79, 53, 0.28), rgba(122, 79, 53, 0));
+  pointer-events: none;
+}
+
+/* --- Служебное --------------------------------------------- */
+
+.reveal,
+.reveal-img {
+  will-change: transform, opacity;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Блокировка прокрутки под поп-апом: работает и в iOS Safari. */
+body.is-locked {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

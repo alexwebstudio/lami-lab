@@ -1,0 +1,158 @@
+.reviews {
+  background: var(--porcelain);
+}
+
+/* --- Состояние с реальными отзывами ------------------------ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 2.6vw, 44px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(26px, 3vw, 40px);
+  border: 1px solid var(--hairline);
+  transition: border-color var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--cognac);
+  background: var(--sand);
+}
+
+.quote {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.meta {
+  margin-top: auto;
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--cocoa);
+}
+
+.author {
+  color: var(--espresso);
+  font-weight: 500;
+}
+
+/* --- Редакционная композиция, пока отзывов нет ------------- */
+
+.editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 96px);
+  align-items: start;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mark {
+  display: block;
+  width: clamp(56px, 6vw, 84px);
+  color: var(--latte);
+  margin-bottom: clamp(20px, 2.4vw, 34px);
+}
+
+.mark svg {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  margin-bottom: clamp(18px, 1.8vw, 26px);
+}
+
+.text {
+  max-width: 34ch;
+}
+
+.sources {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--hairline-soft);
+  margin-top: clamp(0px, 1vw, 14px);
+}
+
+.sources li + li {
+  border-top: 1px solid var(--hairline-soft);
+}
+
+.source {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 20px;
+  padding: clamp(22px, 2.4vw, 32px) 0;
+  transition: color var(--dur) var(--ease-out);
+}
+
+.source:hover {
+  color: var(--cognac);
+}
+
+.sourceName {
+  font-family: var(--font-text);
+  font-size: clamp(24px, 2.4vw, 34px);
+  font-weight: var(--heading-weight);
+  font-variation-settings: 'CONT' var(--heading-cont);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.sourceCaption {
+  grid-column: 1;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--cocoa-soft);
+}
+
+.sourceArrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+.source:hover .sourceArrow {
+  background: var(--cognac);
+  border-color: var(--cognac);
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .editorial {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(28px, 6vw, 44px);
+    align-items: start;
+  }
+
+  .text {
+    max-width: none;
+  }
+}

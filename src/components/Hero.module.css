@@ -1,0 +1,201 @@
+/* Полноэкранный первый экран.
+   lvh — высота вьюпорта со свёрнутым интерфейсом мобильного браузера:
+   при появлении и скрытии адресной строки следующая секция не «подглядывает».
+   vh остаётся запасным значением для старых движков. */
+.hero {
+  position: relative;
+  background: linear-gradient(170deg, var(--latte) 0%, var(--latte-deep) 100%);
+  min-height: 100vh;
+  min-height: 100lvh;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(116px, 13vw, 180px) 0 max(clamp(88px, 7vw, 124px), 13vh);
+  overflow: clip;
+}
+
+/* Фоновая линия ресничного изгиба — занимает пустую верхнюю зону
+   первого экрана и не пересекается с текстом. */
+.curve {
+  position: absolute;
+  left: 1%;
+  top: 13%;
+  width: min(40vw, 560px);
+  height: auto;
+  color: var(--cognac);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.glow {
+  left: 52%;
+  bottom: -22%;
+  width: min(130vw, 1500px);
+  height: 62%;
+  transform: translateX(-50%);
+  opacity: 0.9;
+}
+
+/* Модель прижата к правому краю контентной сетки. */
+.photo {
+  position: absolute;
+  bottom: 0;
+  right: max(calc(var(--gutter) * -0.35), calc(50vw - var(--content) / 2 + var(--gutter) * 0.3));
+  height: clamp(360px, 76%, 840px);
+  width: auto;
+  max-width: 48vw;
+  aspect-ratio: 473 / 588;
+  pointer-events: none;
+}
+
+.photoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.inner {
+  z-index: 2;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: min(680px, 61%);
+}
+
+.titleMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.titleLine {
+  display: block;
+  white-space: nowrap;
+}
+
+.lead {
+  margin-top: clamp(20px, 2vw, 30px);
+  max-width: 34ch;
+  color: rgba(30, 22, 19, 0.72);
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  margin-top: clamp(28px, 2.8vw, 42px);
+}
+
+/* Цены сразу под CTA — пользователь видит порядок сумм без прокрутки. */
+.marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: clamp(24px, 2.4vw, 36px);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: rgba(30, 22, 19, 0.72);
+}
+
+.marks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.marks li + li::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+@media (max-width: 1100px) {
+  .left {
+    max-width: 62%;
+  }
+
+  .photo {
+    height: clamp(320px, 62%, 620px);
+    max-width: 44vw;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Нижний отступ больше верхнего — вся композиция смещается выше центра. */
+  .hero {
+    padding: clamp(20px, 4vw, 36px) 0 max(clamp(52px, 9vw, 84px), env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  /* На мобильном первый экран плотный — линия только мешала бы. */
+  .curve {
+    display: none;
+  }
+
+  /* Флекс-элементы не сжимаются: на невысоких экранах первый экран
+     вырастает под содержимое, а не обрезает его. */
+  .photo,
+  .inner {
+    flex: none;
+  }
+
+  /* Модель по центру и крупнее; высота привязана к вьюпорту,
+     поэтому на обычных телефонах первый экран занимает ровно экран. */
+  .photo {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    height: min(36dvh, 360px);
+    width: auto;
+    max-width: 78%;
+    margin: 0 auto clamp(8px, 1.6vw, 16px);
+  }
+
+  .left {
+    max-width: none;
+  }
+
+  .titleLine {
+    white-space: normal;
+  }
+
+  .lead {
+    margin-top: clamp(14px, 1.8vw, 22px);
+    max-width: 42ch;
+  }
+
+  .actions {
+    margin-top: clamp(20px, 2.4vw, 30px);
+  }
+
+  .marks {
+    margin-top: clamp(14px, 1.8vw, 20px);
+  }
+}
+
+@media (max-width: 560px) {
+  .actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .actions > * {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 12px;
+  }
+
+  .marks {
+    gap: 6px 16px;
+    font-size: 13px;
+  }
+}

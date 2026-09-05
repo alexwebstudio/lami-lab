@@ -1,0 +1,246 @@
+.works {
+  background: var(--sand);
+}
+
+/* --- Управление в шапке секции ----------------------------- */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 44px);
+}
+
+.counter {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.counterCurrent {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.counterTotal {
+  font-size: 16px;
+  color: var(--cocoa-soft);
+}
+
+.arrows {
+  display: flex;
+  gap: 12px;
+}
+
+.arrow {
+  width: 62px;
+  height: 62px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--espresso);
+  background: transparent;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out);
+}
+
+.arrow:hover {
+  background: var(--espresso);
+  border-color: var(--espresso);
+  color: var(--porcelain);
+}
+
+.arrow:active {
+  transform: scale(0.95);
+}
+
+/* --- Сцена: асимметричная пара кадров ---------------------- */
+
+.stage {
+  position: relative;
+  outline: none;
+  touch-action: pan-y;
+  overflow: hidden;
+}
+
+.stage:focus-visible {
+  outline: 2px solid var(--cognac);
+  outline-offset: 16px;
+}
+
+.column {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: clamp(6px, 1.2vw, 18px) 0 clamp(28px, 4vw, 72px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.index {
+  font-family: var(--font-text);
+  font-size: clamp(56px, 7vw, 104px);
+  font-weight: var(--heading-weight);
+  font-variation-settings: 'CONT' var(--heading-cont);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--latte-deep);
+}
+
+.category {
+  margin: clamp(12px, 1.4vw, 18px) 0 0;
+  color: var(--cocoa);
+  max-width: 20ch;
+}
+
+.detail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--latte);
+  border-bottom-left-radius: var(--corner-md);
+}
+
+/* Деталь перекрывает нижний левый угол крупного кадра. */
+.detailWrap {
+  width: 76%;
+  margin-left: auto;
+  pointer-events: auto;
+}
+
+.featured {
+  position: relative;
+  width: 58%;
+  margin-left: auto;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--latte);
+  border-top-right-radius: var(--corner-lg);
+  will-change: transform;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* --- Лента превью ------------------------------------------ */
+
+.rail {
+  display: flex;
+  gap: clamp(12px, 1.4vw, 20px);
+  margin-top: clamp(56px, 5vw, 96px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+.thumb {
+  position: relative;
+  display: block;
+  width: clamp(88px, 9vw, 128px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--latte);
+  opacity: 0.42;
+  filter: grayscale(0.35);
+  transition:
+    opacity var(--dur) var(--ease-out),
+    filter var(--dur) var(--ease-out),
+    border-radius var(--dur) var(--ease-out);
+}
+
+.thumb:hover {
+  opacity: 0.8;
+  filter: grayscale(0);
+}
+
+.thumbActive {
+  opacity: 1;
+  filter: grayscale(0);
+  border-top-left-radius: var(--corner-md);
+}
+
+@media (max-width: 900px) {
+  /* Кадры стоят в потоке и не наезжают друг на друга и на стрелки. */
+  .stage {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 4vw, 24px);
+  }
+
+  .column {
+    position: static;
+    order: 2;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
+    padding: 0;
+    margin: 0;
+    pointer-events: auto;
+  }
+
+  .head {
+    flex: none;
+  }
+
+  .index {
+    font-size: clamp(40px, 13vw, 64px);
+    line-height: 1;
+  }
+
+  .category {
+    margin: 4px 0 0;
+  }
+
+  .detailWrap {
+    width: min(38%, 170px);
+    margin-left: auto;
+    flex: none;
+  }
+
+  .detail {
+    border-bottom-left-radius: var(--corner-md);
+  }
+
+  .featured {
+    order: 1;
+    width: 100%;
+    margin-left: 0;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (max-width: 560px) {
+  .arrow {
+    width: 54px;
+    height: 54px;
+  }
+
+  .counterCurrent {
+    font-size: 28px;
+  }
+}
