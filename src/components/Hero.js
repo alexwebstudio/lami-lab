@@ -48,21 +48,6 @@ export default function Hero() {
     <section className={styles.hero} ref={rootRef} id="top" aria-labelledby="hero-title">
       <span className={`glow ${styles.glow}`} aria-hidden="true" />
 
-      {/* Линия изгиба ресницы — тихий фирменный акцент фона. */}
-      <svg className={styles.curve} viewBox="0 0 900 420" fill="none" aria-hidden="true">
-        <path
-          d="M8 404C120 150 380 26 892 92"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-        <g strokeWidth="1.4" strokeLinecap="round" stroke="currentColor">
-          <path d="M138 236 96 176" />
-          <path d="M236 154 206 86" />
-          <path d="M348 100 330 28" />
-          <path d="M468 70 460 0" />
-        </g>
-      </svg>
 
       <div className={styles.photo}>
         <Image
@@ -78,19 +63,16 @@ export default function Hero() {
         <div className={styles.left}>
           <h1 id="hero-title" className="display">
             <span className={styles.titleMask}>
-              <span className={styles.titleLine}>Ламинирование</span>
+              <span className={styles.titleLine}>Взгляд, который</span>
             </span>{' '}
             <span className={styles.titleMask}>
-              <span className={styles.titleLine}>ресниц и бровей</span>
-            </span>{' '}
-            <span className={styles.titleMask}>
-              <span className={styles.titleLine}>в Караганде</span>
+              <span className={styles.titleLine}>говорит первым</span>
             </span>
           </h1>
 
           <p className={`lead ${styles.lead}`}>
-            Естественный изгиб и аккуратная форма, которые держатся сами — выразительный взгляд
-            без ежедневной укладки.
+            Ламинирование ресниц и бровей в Караганде. Естественный изгиб и форма, которые
+            держатся сами — без ежедневной укладки.
           </p>
 
           <div className={styles.actions}>

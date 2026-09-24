@@ -67,6 +67,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
 }
 
 html,
@@ -157,9 +158,9 @@ button {
   font-family: var(--font-text);
   font-weight: var(--heading-weight);
   font-variation-settings: 'CONT' var(--heading-cont);
-  font-size: clamp(34px, 5.4vw, 70px);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  font-size: clamp(34px, 5.8vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -336,12 +337,9 @@ button {
   border: 0;
 }
 
-/* Блокировка прокрутки под поп-апом: работает и в iOS Safari. */
-body.is-locked {
-  position: fixed;
-  left: 0;
-  right: 0;
-  width: 100%;
+/* Блокировка прокрутки под поп-апом: позиция страницы сохраняется. */
+html.is-locked,
+html.is-locked body {
   overflow: hidden;
 }
 

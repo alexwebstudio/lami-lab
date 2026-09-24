@@ -41,14 +41,6 @@ export default function Works() {
     setRestart((value) => value + 1);
   }, []);
 
-  const goTo = useCallback((next) => {
-    setIndex((current) => {
-      if (next === current) return current;
-      directionRef.current = next > current ? 1 : -1;
-      return next;
-    });
-    setRestart((value) => value + 1);
-  }, []);
 
   /* Автопоказ включается, когда секция появляется на экране. */
   useEffect(() => {
@@ -209,18 +201,6 @@ export default function Works() {
                 {slide.category}
               </p>
             </div>
-            <div className={styles.detailWrap}>
-              <figure className={`reveal-img ${styles.detail}`} data-slide-part>
-                <Image
-                  key={slide.detail}
-                  src={slide.detail}
-                  alt={slide.detailAlt}
-                  fill
-                  sizes="(max-width: 900px) 45vw, 26vw"
-                  className={styles.image}
-                />
-              </figure>
-            </div>
           </div>
 
           <figure className={`reveal-img ${styles.featured}`} data-slide-part>
@@ -235,21 +215,6 @@ export default function Works() {
           </figure>
         </div>
 
-        <ul className={`reveal ${styles.rail}`} aria-label="Все работы">
-          {works.map((work, i) => (
-            <li key={work.id}>
-              <button
-                type="button"
-                className={`${styles.thumb} ${i === index ? styles.thumbActive : ''}`}
-                onClick={() => goTo(i)}
-                aria-label={`Показать работу ${pad(work.id)} — ${work.category}`}
-                aria-current={i === index ? 'true' : undefined}
-              >
-                <Image src={work.image} alt="" fill sizes="140px" className={styles.image} />
-              </button>
-            </li>
-          ))}
-        </ul>
       </Reveal>
     </section>
   );

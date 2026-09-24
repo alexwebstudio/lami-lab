@@ -1,30 +1,16 @@
-/* Полноэкранный первый экран.
-   lvh — высота вьюпорта со свёрнутым интерфейсом мобильного браузера:
-   при появлении и скрытии адресной строки следующая секция не «подглядывает».
-   vh остаётся запасным значением для старых движков. */
+/* Компактный первый экран: вместе с шапкой (104px) помещается в окно
+   ноутбука, на больших мониторах высота ограничена 760px. */
 .hero {
   position: relative;
   background: linear-gradient(170deg, var(--latte) 0%, var(--latte-deep) 100%);
-  min-height: 100vh;
-  min-height: 100lvh;
+  min-height: clamp(560px, calc(100vh - 104px), 760px);
+  min-height: clamp(560px, calc(100svh - 104px), 760px);
   display: flex;
   align-items: flex-end;
-  padding: clamp(116px, 13vw, 180px) 0 max(clamp(88px, 7vw, 124px), 13vh);
+  padding: clamp(72px, 8vw, 120px) 0 clamp(56px, 6vw, 96px);
   overflow: clip;
 }
 
-/* Фоновая линия ресничного изгиба — занимает пустую верхнюю зону
-   первого экрана и не пересекается с текстом. */
-.curve {
-  position: absolute;
-  left: 1%;
-  top: 13%;
-  width: min(40vw, 560px);
-  height: auto;
-  color: var(--cognac);
-  opacity: 0.16;
-  pointer-events: none;
-}
 
 .glow {
   left: 52%;
@@ -40,7 +26,7 @@
   position: absolute;
   bottom: 0;
   right: max(calc(var(--gutter) * -0.35), calc(50vw - var(--content) / 2 + var(--gutter) * 0.3));
-  height: clamp(360px, 76%, 840px);
+  height: clamp(360px, 90%, 740px);
   width: auto;
   max-width: 48vw;
   aspect-ratio: 473 / 588;
@@ -78,7 +64,7 @@
 
 .lead {
   margin-top: clamp(20px, 2vw, 30px);
-  max-width: 34ch;
+  max-width: 44ch;
   color: rgba(30, 22, 19, 0.72);
 }
 
@@ -129,6 +115,7 @@
 @media (max-width: 900px) {
   /* Нижний отступ больше верхнего — вся композиция смещается выше центра. */
   .hero {
+    min-height: 0;
     padding: clamp(20px, 4vw, 36px) 0 max(clamp(52px, 9vw, 84px), env(safe-area-inset-bottom));
     display: flex;
     flex-direction: column;
@@ -136,10 +123,6 @@
     align-items: stretch;
   }
 
-  /* На мобильном первый экран плотный — линия только мешала бы. */
-  .curve {
-    display: none;
-  }
 
   /* Флекс-элементы не сжимаются: на невысоких экранах первый экран
      вырастает под содержимое, а не обрезает его. */
@@ -154,7 +137,7 @@
     position: relative;
     right: auto;
     bottom: auto;
-    height: min(36dvh, 360px);
+    height: min(33dvh, 340px);
     width: auto;
     max-width: 78%;
     margin: 0 auto clamp(8px, 1.6vw, 16px);

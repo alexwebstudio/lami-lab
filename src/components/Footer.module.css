@@ -103,32 +103,28 @@
   line-height: 1.4;
 }
 
-.legal {
-  display: flex;
-  flex-wrap: wrap;
+
+/* Нижняя строка: копирайт слева, разработчик по центру, «Наверх» справа. */
+.bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  gap: 12px 30px;
+  gap: 16px 32px;
   padding: clamp(20px, 2.2vw, 30px) 0;
   border-top: 1px solid rgba(247, 242, 237, 0.16);
-  border-bottom: 1px solid rgba(247, 242, 237, 0.16);
   font-family: var(--font-ui);
   font-size: 14px;
-  color: rgba(247, 242, 237, 0.55);
+  color: rgba(247, 242, 237, 0.5);
 }
 
-.legalLink {
-  color: rgba(247, 242, 237, 0.62);
-  transition: color var(--dur) var(--ease-out);
-}
-
-.legalLink:hover {
-  color: var(--porcelain);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.copy {
+  justify-self: start;
+  line-height: 1.5;
+  text-wrap: balance;
 }
 
 .up {
-  margin-left: auto;
+  justify-self: end;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -167,21 +163,7 @@
   transform: translateY(-3px);
 }
 
-.bottom {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 28px;
-  padding-top: clamp(18px, 2vw, 26px);
-  font-family: var(--font-ui);
-  font-size: 14px;
-  color: rgba(247, 242, 237, 0.45);
-}
 
-.copy {
-  max-width: 46ch;
-}
 
 .devLabel {
   color: inherit;
@@ -205,23 +187,20 @@
 }
 
 @media (max-width: 900px) {
+  .bottom {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+  }
+
+  .up {
+    justify-self: stretch;
+    justify-content: space-between;
+  }
+
   .top {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 
-  .legal {
-    gap: 12px 24px;
-  }
 
-  .up {
-    margin-left: 0;
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .bottom {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }

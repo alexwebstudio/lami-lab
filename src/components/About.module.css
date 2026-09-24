@@ -107,11 +107,43 @@
   color: var(--espresso);
 }
 
+/* Пропорции колонок остаются прежними, чтобы композиция не «скакала». */
+.gridPlain {
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+}
+
 /* --- Как я работаю ----------------------------------------- */
 
 .trust {
   margin-top: clamp(48px, 5vw, 92px);
   padding-bottom: clamp(8px, 1vw, 16px);
+}
+
+/* Блок доверия на месте скрытого портрета: без верхнего отступа сетки,
+   пункты идут вертикальным списком в правой колонке. */
+.trustAside {
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+.trustAside .trustList {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.trustAside .trustItem {
+  padding: clamp(18px, 2vw, 26px) 0;
+  border-top: 1px solid rgba(30, 22, 19, 0.2);
+}
+
+.trustAside .trustItem:first-of-type {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.trustAside .trustTitle,
+.trustAside .trustText {
+  max-width: none;
 }
 
 .trustHead {

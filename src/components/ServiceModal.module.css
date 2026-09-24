@@ -1,11 +1,16 @@
 .card {
   display: grid;
-  grid-template-columns: 340px minmax(0, 1fr);
-  min-height: 100%;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
 }
 
+/* Крупное превью: занимает всю высоту окна и остаётся на месте,
+   пока текст справа прокручивается. */
 .media {
-  position: relative;
+  position: sticky;
+  top: 0;
+  height: min(86vh, 800px);
+  height: min(86dvh, 800px);
   background: var(--latte);
   border-top-left-radius: var(--corner-lg);
   overflow: hidden;
@@ -122,7 +127,10 @@
   }
 
   .media {
-    aspect-ratio: 16 / 10;
+    position: relative;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    max-height: 62dvh;
     border-top-left-radius: var(--corner-lg);
   }
 

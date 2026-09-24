@@ -55,7 +55,14 @@ export default function MobileMenu({ open, onClose }) {
      содержащим блоком для position: fixed — внутри неё меню прижималось
      к шапке вместо полноэкранного слоя. */
   return createPortal(
-    <div className={styles.root} ref={rootRef} role="dialog" aria-modal="true" aria-label="Меню">
+    <div
+      className={styles.root}
+      ref={rootRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Меню"
+      data-lenis-prevent
+    >
       <div className={styles.top}>
         <span className={styles.logo} data-anim>
           {site.name}

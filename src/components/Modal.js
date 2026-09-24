@@ -37,7 +37,7 @@ export default function Modal({ open, onClose, labelledBy, size = 'default', chi
       if (e.key === 'Escape') close();
     };
     document.addEventListener('keydown', onKey);
-    panelRef.current?.focus();
+    panelRef.current?.focus({ preventScroll: true });
 
     return () => {
       document.removeEventListener('keydown', onKey);
@@ -53,7 +53,13 @@ export default function Modal({ open, onClose, labelledBy, size = 'default', chi
   if (!mounted || !open) return null;
 
   return createPortal(
-    <div className={`${styles.root} ${closing ? styles.closing : ''}`} role="presentation">
+    /* data-lenis-prevent: Lenis остановлен на время поп-апа и без этого атрибута
+       гасил бы колесо и тач и внутри самого окна — поп-ап не прокручивался. */
+    <div
+      className={`${styles.root} ${closing ? styles.closing : ''}`}
+      role="presentation"
+      data-lenis-prevent
+    >
       <div className={styles.backdrop} onClick={close} />
       <div
         ref={panelRef}

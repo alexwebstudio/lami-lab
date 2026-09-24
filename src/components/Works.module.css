@@ -110,21 +110,7 @@
   max-width: 20ch;
 }
 
-.detail {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--latte);
-  border-bottom-left-radius: var(--corner-md);
-}
 
-/* Деталь перекрывает нижний левый угол крупного кадра. */
-.detailWrap {
-  width: 76%;
-  margin-left: auto;
-  pointer-events: auto;
-}
 
 .featured {
   position: relative;
@@ -141,46 +127,6 @@
   object-fit: cover;
 }
 
-/* --- Лента превью ------------------------------------------ */
-
-.rail {
-  display: flex;
-  gap: clamp(12px, 1.4vw, 20px);
-  margin-top: clamp(56px, 5vw, 96px);
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding-bottom: 4px;
-}
-
-.rail::-webkit-scrollbar {
-  display: none;
-}
-
-.thumb {
-  position: relative;
-  display: block;
-  width: clamp(88px, 9vw, 128px);
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--latte);
-  opacity: 0.42;
-  filter: grayscale(0.35);
-  transition:
-    opacity var(--dur) var(--ease-out),
-    filter var(--dur) var(--ease-out),
-    border-radius var(--dur) var(--ease-out);
-}
-
-.thumb:hover {
-  opacity: 0.8;
-  filter: grayscale(0);
-}
-
-.thumbActive {
-  opacity: 1;
-  filter: grayscale(0);
-  border-top-left-radius: var(--corner-md);
-}
 
 @media (max-width: 900px) {
   /* Кадры стоят в потоке и не наезжают друг на друга и на стрелки. */
@@ -216,15 +162,7 @@
     margin: 4px 0 0;
   }
 
-  .detailWrap {
-    width: min(38%, 170px);
-    margin-left: auto;
-    flex: none;
-  }
 
-  .detail {
-    border-bottom-left-radius: var(--corner-md);
-  }
 
   .featured {
     order: 1;

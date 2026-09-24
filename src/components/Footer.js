@@ -1,9 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import Reveal from './Reveal';
 import { footerNavItems } from '@/data/navigation';
-import { legalPages, site } from '@/data/site';
+import { site } from '@/data/site';
 import { ArrowUpRightIcon } from './icons';
 import { scrollToSection, scrollToTop } from '@/lib/scroll';
 import styles from './Footer.module.css';
@@ -70,12 +69,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className={`reveal ${styles.legal}`}>
-          {legalPages.map((page) => (
-            <Link key={page.href} className={styles.legalLink} href={page.href}>
-              {page.title}
-            </Link>
-          ))}
+        <div className={`reveal ${styles.bottom}`}>
+          <p className={styles.copy}>
+            © {year} {site.name} · ламинирование ресниц и бровей, {site.city}
+          </p>
+          <a className={styles.dev} href={site.developer.href} target="_blank" rel="noreferrer">
+            <span className={styles.devLabel}>Разработано</span>
+            <span className={styles.devName}>Alex Web Studio</span>
+            <ArrowUpRightIcon />
+          </a>
           <button type="button" className={styles.up} onClick={scrollToTop}>
             Наверх
             <span className={styles.upArrow} aria-hidden="true">
@@ -90,17 +92,6 @@ export default function Footer() {
               </svg>
             </span>
           </button>
-        </div>
-
-        <div className={styles.bottom}>
-          <p className={styles.copy}>
-            © {year} {site.name} · ламинирование ресниц и бровей, {site.city}
-          </p>
-          <a className={styles.dev} href={site.developer.href} target="_blank" rel="noreferrer">
-            <span className={styles.devLabel}>Разработано</span>
-            <span className={styles.devName}>Alex Web Studio</span>
-            <ArrowUpRightIcon />
-          </a>
         </div>
       </Reveal>
     </footer>

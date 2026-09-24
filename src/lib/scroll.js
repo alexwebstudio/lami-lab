@@ -46,33 +46,24 @@ export function scrollToTop() {
 /**
  * Остановка прокрутки, пока открыт поп-ап или мобильное меню.
  *
- * `overflow: hidden` на body в iOS Safari не блокирует прокрутку, поэтому
- * body фиксируется на текущей позиции, а после закрытия она возвращается.
- * Блокировки считаются: карточка процедуры может открыть форму записи
- * поверх себя, и скролл должен разблокироваться только после последнего.
+ * Документ не сдвигается и не прокручивается программно — прокрутка просто
+ * запрещается через overflow на <html>, поэтому после закрытия пользователь
+ * остаётся ровно там, где открыл поп-ап. Lenis останавливается, а внутри
+ * поп-апов стоит data-lenis-prevent, чтобы их собственный скролл работал.
+ * Блокировки считаются: карточка процедуры может открыть что-то поверх себя.
  */
 let locks = 0;
-let savedScroll = 0;
 
 export function lockScroll() {
   locks += 1;
   if (locks > 1) return;
-
-  savedScroll = window.scrollY;
-  document.body.style.top = `-${savedScroll}px`;
-  document.body.classList.add('is-locked');
+  document.documentElement.classList.add('is-locked');
   if (lenis) lenis.stop();
 }
 
 export function unlockScroll() {
   locks = Math.max(0, locks - 1);
   if (locks > 0) return;
-
-  document.body.classList.remove('is-locked');
-  document.body.style.top = '';
-  window.scrollTo(0, savedScroll);
-  if (lenis) {
-    lenis.start();
-    lenis.scrollTo(savedScroll, { immediate: true });
-  }
+  document.documentElement.classList.remove('is-locked');
+  if (lenis) lenis.start();
 }
